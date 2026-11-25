@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giza A Fried Chicken – Bhokardan</title>
+<meta name="description" content="Giza A Fried Chicken in Bhokardan. Dine-in, takeaway and delivery. Open until 11 PM.">
+<style>
+  /* ===== रंग इथून बदला ===== */
+  :root {
+    --bg: #f3faf9;
+    --surface: #ffffff;
+    --ink: #10282a;
+    --muted: #4b6668;
+    --line: #cfe5e2;
+    --red: #0b5d63;
+    --on-red: #f1fbfa;
+    --gold: #ffb81c;
+    --head: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    --body: "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0c1a1b;
+      --surface: #132627;
+      --ink: #e8f4f3;
+      --muted: #a9c2c0;
+      --line: #27403f;
+      --red: #084a4f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.05rem/1.65 var(--body); }
+  a:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+  h1, h2, h3 { font-family: var(--head); margin: 0; line-height: 1.12; }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin-bottom: 1.25rem; }
+  section { padding: 3.5rem 0; }
+
+  header { background: var(--red); color: var(--on-red); }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; padding-top: 1rem; padding-bottom: 1rem; }
+  .logo { font: 800 1.3rem var(--head); color: var(--on-red); text-decoration: none; }
+  .logo small { display: block; font: 400 .8rem var(--body); opacity: .85; }
+  nav a { color: var(--on-red); text-decoration: none; margin-left: 1.1rem; opacity: .92; }
+  nav a:hover { opacity: 1; text-decoration: underline; }
+
+  .hero { background: var(--red); color: var(--on-red); padding: 3rem 0 4.5rem; }
+  .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); max-width: 12ch; letter-spacing: -0.01em; }
+  .hero p { max-width: 46ch; margin: 1.25rem 0 1.5rem; opacity: .95; }
+  .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0 0 1.75rem; padding: 0; list-style: none; }
+  .badges li { border: 1.5px solid var(--on-red); border-radius: 999px; padding: .25rem .9rem; font-size: .95rem; }
+  .btn { display: inline-block; padding: .85rem 1.5rem; border-radius: 999px; font-weight: 700; text-decoration: none; margin: 0 .6rem .6rem 0; }
+  .btn.gold { background: var(--gold); color: #10282a; }
+  .btn.line { border: 2px solid var(--on-red); color: var(--on-red); }
+  .rating { margin-top: .5rem; font-size: .95rem; opacity: .95; }
+
+  .note { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: .7rem 1rem; color: var(--muted); font-size: .95rem; margin-bottom: 1.25rem; }
+  .menu { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: .5rem 2.5rem; }
+  .menu li { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 0; border-bottom: 1px dashed var(--line); }
+  .menu .name { font-weight: 700; }
+  .menu .desc { display: block; color: var(--muted); font-size: .93rem; font-weight: 400; }
+  .menu .price { font-weight: 700; white-space: nowrap; color: var(--red); }
+
+  .tabs { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+  .tabs button {
+    font: inherit; font-weight: 600; cursor: pointer;
+    padding: .5rem 1rem; border-radius: 999px;
+    border: 2px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .tabs button[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: var(--on-red); }
+  .tabs button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .cat { margin-bottom: 2.5rem; }
+  .cat[hidden] { display: none; }
+  .cat-title { font-size: 1.5rem; margin-bottom: .5rem; padding-bottom: .4rem; border-bottom: 3px solid var(--gold); }
+  .sub { font: 700 1.05rem var(--head); color: var(--muted); margin: 1.1rem 0 .2rem; }
+  .dips { margin: 0; color: var(--muted); }
+
+  .how { background: var(--surface); border-block: 1px solid var(--line); }
+  .how .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; }
+  .how .grid div { border-left: 5px solid var(--gold); padding-left: 1rem; }
+  .how h3 { font-size: 1.2rem; margin-bottom: .3rem; }
+  .how p { margin: 0; color: var(--muted); }
+
+  .visit { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .visit div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem 1.4rem; }
+  .visit h3 { font-size: 1.2rem; margin-bottom: .5rem; }
+  .visit p { margin: 0; color: var(--muted); }
+  .visit a { color: var(--red); font-weight: 700; }
+  @media (prefers-color-scheme: dark) { .visit a { color: var(--gold); } .menu .price { color: var(--gold); } }
+
+  footer { background: var(--red); color: var(--on-red); text-align: center; padding: 2rem 1rem; font-size: .95rem; }
+  @media (max-width: 760px) { nav a:first-child { margin-left: 0; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Giza A Fried Chicken<small>जीजा फ्राइड चिकन</small></a>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#order">Order</a>
+      <a href="#visit">Find us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 1. Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <h1>Crispy fried chicken, hot and fresh.</h1>
+      <p>A local favourite in Bhokardan on Jalna Road. Eat with friends, pick it up on your way home, or get it delivered.</p>
+      <ul class="badges">
+        <li>Dine-in</li>
+        <li>Takeaway</li>
+        <li>Delivery</li>
+      </ul>
+      <a class="btn gold" href="tel:+917755907737">Call to order</a>
+      <a class="btn line" href="#menu">See the menu</a>
+      <div class="rating">★ 4.9 from 184 Google reviews &nbsp;|&nbsp; Open until 11:00 PM</div>
+    </div>
+  </section>
+
+  <!-- 2. Menu: पदार्थ आणि किमती बदलायच्या असतील तर इथे बदला -->
+  <section id="menu">
+    <div class="wrap">
+      <h2>Menu</h2>
+      <div class="tabs" id="tabs">
+        <button type="button" data-cat="all" aria-pressed="true">All</button>
+        <button type="button" data-cat="starters" aria-pressed="false">Chicken starters</button>
+        <button type="button" data-cat="pizza" aria-pressed="false">Pizza</button>
+        <button type="button" data-cat="garlic" aria-pressed="false">Garlic bread</button>
+        <button type="button" data-cat="pasta" aria-pressed="false">Pasta</button>
+        <button type="button" data-cat="burgers" aria-pressed="false">Burgers</button>
+        <button type="button" data-cat="twisters" aria-pressed="false">Twisters</button>
+        <button type="button" data-cat="sandwiches" aria-pressed="false">Sandwiches</button>
+        <button type="button" data-cat="fries" aria-pressed="false">Fries</button>
+        <button type="button" data-cat="drinks" aria-pressed="false">Drinks</button>
+        <button type="button" data-cat="combos" aria-pressed="false">Combos and buckets</button>
+      </div>
+
+      <div class="cat" data-cat="starters">
+        <h3 class="cat-title">Chicken starters</h3>
+        <ul class="menu">
+          <li><span class="name">Chicken Popcorn Regular (15 pcs)</span><span class="price">₹119</span></li>
+          <li><span class="name">Chicken Hot Wings (3 pcs)</span><span class="price">₹99</span></li>
+          <li><span class="name">Chicken Lollipop (3 pcs)</span><span class="price">₹109</span></li>
+          <li><span class="name">Chicken Tender (2 pcs)</span><span class="price">₹99</span></li>
+          <li><span class="name">Chicken Nuggets (8 pcs)</span><span class="price">₹149</span></li>
+          <li><span class="name">Broasted Chicken (2 pcs)</span><span class="price">₹129</span></li>
+          <li><span class="name">Chicken Thigh (1 pc)</span><span class="price">₹79</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="pizza">
+        <h3 class="cat-title">Pizza</h3>
+        <h4 class="sub">Pizza</h4>
+        <ul class="menu">
+          <li><span class="name">Chicken Tikka Pizza</span><span class="price">₹129</span></li>
+          <li><span class="name">Chicken Sausage Pizza</span><span class="price">₹119</span></li>
+          <li><span class="name">Chicken Peri Peri Pizza</span><span class="price">₹109</span></li>
+          <li><span class="name">Paneer Tikka Pizza</span><span class="price">₹149</span></li>
+          <li><span class="name">Sweet Corn Pizza</span><span class="price">₹139</span></li>
+          <li><span class="name">Fresh Veggies Pizza</span><span class="price">₹119</span></li>
+        </ul>
+        <h4 class="sub">Pizza sandwich</h4>
+        <ul class="menu">
+          <li><span class="name">Chicken Pizza Sandwich</span><span class="price">₹149</span></li>
+          <li><span class="name">Chicken Cheese Pizza Sandwich</span><span class="price">₹159</span></li>
+          <li><span class="name">Chicken Cheese Corn Pizza Sandwich</span><span class="price">₹169</span></li>
+          <li><span class="name">Veg Aalu Tikki Pizza Sandwich</span><span class="price">₹139</span></li>
+          <li><span class="name">Veg Corn Pizza Sandwich</span><span class="price">₹159</span></li>
+          <li><span class="name">Veg Pizza Sandwich Extra Cheese</span><span class="price">₹169</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="garlic">
+        <h3 class="cat-title">Garlic bread</h3>
+        <ul class="menu">
+          <li><span class="name">Chicken Cheese Garlic Bread</span><span class="price">₹169</span></li>
+          <li><span class="name">Chicken Tikka Garlic Bread</span><span class="price">₹159</span></li>
+          <li><span class="name">Chicken Schezwan Garlic Bread</span><span class="price">₹159</span></li>
+          <li><span class="name">Veg Cheese Corn Garlic Bread</span><span class="price">₹129</span></li>
+          <li><span class="name">Fresh Veggies Garlic Bread</span><span class="price">₹119</span></li>
+          <li><span class="name">Mozzarella Cheese Garlic Bread</span><span class="price">₹99</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="pasta">
+        <h3 class="cat-title">Pasta</h3>
+        <ul class="menu">
+          <li><span class="name">Chicken Red Sauce Pasta</span><span class="price">₹149</span></li>
+          <li><span class="name">Chicken White Sauce Pasta</span><span class="price">₹149</span></li>
+          <li><span class="name">Chicken Mix Sauce Pasta</span><span class="price">₹159</span></li>
+          <li><span class="name">Red Sauce Pasta</span><span class="price">₹129</span></li>
+          <li><span class="name">White Sauce Pasta</span><span class="price">₹129</span></li>
+          <li><span class="name">Mix Sauce Pasta</span><span class="price">₹139</span></li>
+          <li><span class="name">Paneer Red Sauce Pasta</span><span class="price">₹159</span></li>
+          <li><span class="name">Paneer White Sauce Pasta</span><span class="price">₹159</span></li>
+          <li><span class="name">Paneer Mix Sauce Pasta</span><span class="price">₹169</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="burgers">
+        <h3 class="cat-title">Burgers</h3>
+        <h4 class="sub">Chicken</h4>
+        <ul class="menu">
+          <li><span class="name">Chicken Zinger Burger</span><span class="price">₹89</span></li>
+          <li><span class="name">Chicken Tandoori Zinger</span><span class="price">₹99</span></li>
+          <li><span class="name">Chicken Chilli Cheese Melt Zinger</span><span class="price">₹119</span></li>
+          <li><span class="name">Chicken Whooper Double Layered</span><span class="price">₹149</span></li>
+          <li><span class="name">Chicken Smacker (Burger Without Bun)</span><span class="price">₹159</span></li>
+          <li><span class="name">Chicken Pizza Burger</span><span class="price">₹169</span></li>
+          <li><span class="name">Giza Surprise Burger</span><span class="price">₹169</span></li>
+        </ul>
+        <h4 class="sub">Veg</h4>
+        <ul class="menu">
+          <li><span class="name">Crispy Veg</span><span class="price">₹69</span></li>
+          <li><span class="name">Veg Crunch</span><span class="price">₹79</span></li>
+          <li><span class="name">Vegies Burger</span><span class="price">₹89</span></li>
+          <li><span class="name">Veg Chilli Cheese Melt Zinger</span><span class="price">₹99</span></li>
+          <li><span class="name">Veg Cheese Corn</span><span class="price">₹99</span></li>
+          <li><span class="name">Veg Whooper Double Layered</span><span class="price">₹129</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="twisters">
+        <h3 class="cat-title">Twisters</h3>
+        <h4 class="sub">Chicken</h4>
+        <ul class="menu">
+          <li><span class="name">Classic Chicken Twister</span><span class="price">₹99</span></li>
+          <li><span class="name">Tandoori Chicken Twister</span><span class="price">₹109</span></li>
+          <li><span class="name">Peri Peri Chicken Twister</span><span class="price">₹119</span></li>
+          <li><span class="name">Chicken Cheese Twister</span><span class="price">₹129</span></li>
+          <li><span class="name">Chicken Kheema Twister</span><span class="price">₹149</span></li>
+        </ul>
+        <h4 class="sub">Veg</h4>
+        <ul class="menu">
+          <li><span class="name">Classic Veg Spicy Twister</span><span class="price">₹89</span></li>
+          <li><span class="name">Schezwan Veg Cheese Twister</span><span class="price">₹109</span></li>
+          <li><span class="name">Paneer Corn Twister</span><span class="price">₹119</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="sandwiches">
+        <h3 class="cat-title">Sandwiches</h3>
+        <ul class="menu">
+          <li><span class="name">Tandoori Grilled Chicken Sandwich</span><span class="price">₹99</span></li>
+          <li><span class="name">Chicken Cheese Sandwich</span><span class="price">₹109</span></li>
+          <li><span class="name">Mexican Sandwich</span><span class="price">₹119</span></li>
+          <li><span class="name">Veg Cheese Corn Sandwich</span><span class="price">₹89</span></li>
+          <li><span class="name">Paneer Tikka Jumbo Sandwich</span><span class="price">₹129</span></li>
+          <li><span class="name">Chocolate Cheese Sandwich</span><span class="price">₹129</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="fries">
+        <h3 class="cat-title">Fries</h3>
+        <h4 class="sub">Chicken</h4>
+        <ul class="menu">
+          <li><span class="name">Chicken &amp; Cheese Fries</span><span class="price">₹119</span></li>
+          <li><span class="name">Chicken &amp; Kheema Fries</span><span class="price">₹139</span></li>
+          <li><span class="name">Makhani Chicken Cheese Fries</span><span class="price">₹149</span></li>
+          <li><span class="name">Samincho Fries</span><span class="price">₹199</span></li>
+        </ul>
+        <h4 class="sub">Veg</h4>
+        <ul class="menu">
+          <li><span class="name">Salted French Fries</span><span class="price">₹79</span></li>
+          <li><span class="name">Peri Peri Fries</span><span class="price">₹99</span></li>
+          <li><span class="name">Schezwan Mexican Fries</span><span class="price">₹109</span></li>
+          <li><span class="name">Cheese Fries</span><span class="price">₹129</span></li>
+          <li><span class="name">Paneer Makhni Fries</span><span class="price">₹149</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="drinks">
+        <h3 class="cat-title">Drinks</h3>
+        <h4 class="sub">Cold coffee and shakes</h4>
+        <ul class="menu">
+          <li><span class="name">Cold Coffee</span><span class="price">₹69</span></li>
+          <li><span class="name">Kit-Kat</span><span class="price">₹89</span></li>
+          <li><span class="name">Oreo</span><span class="price">₹99</span></li>
+          <li><span class="name">Oreo Berry</span><span class="price">₹99</span></li>
+          <li><span class="name">Black Currant</span><span class="price">₹99</span></li>
+          <li><span class="name">Mango</span><span class="price">₹99</span></li>
+          <li><span class="name">Strawberry</span><span class="price">₹99</span></li>
+        </ul>
+        <h4 class="sub">Mocktails and iced tea</h4>
+        <ul class="menu">
+          <li><span class="name">Virgin Mojito</span><span class="price">₹79</span></li>
+          <li><span class="name">Lemon Ice Tea</span><span class="price">₹79</span></li>
+          <li><span class="name">Peach Ice Tea</span><span class="price">₹99</span></li>
+          <li><span class="name">Blue Curacao</span><span class="price">₹99</span></li>
+          <li><span class="name">Bubble Gum</span><span class="price">₹99</span></li>
+          <li><span class="name">Apple Crush</span><span class="price">₹99</span></li>
+        </ul>
+      </div>
+
+      <div class="cat" data-cat="combos">
+        <h3 class="cat-title">Combos and buckets</h3>
+        <ul class="menu">
+          <li><span class="name">Bucket For Two<span class="desc">4 Chicken Lollipop + 20 Chicken Popcorn + 1 Dip</span></span><span class="price">₹239</span></li>
+          <li><span class="name">Value Meal<span class="desc">3 Hot Wings + 2 Lollipop + 10 Popcorn + 1 Dip</span></span><span class="price">₹249</span></li>
+          <li><span class="name">Zinger Combo<span class="desc">2 Chicken Burgers + 2 Hot Wings + 2 Lollipop + Coke 250 ml + 2 Dips</span></span><span class="price">₹379</span></li>
+          <li><span class="name">Mingle’s Meal<span class="desc">4 Hot Wings + 2 Lollipop + 20 Popcorn + Medium Fries + Coke 250 ml + 2 Dips</span></span><span class="price">₹429</span></li>
+          <li><span class="name">Friendship Bucket<span class="desc">3 Lollipop + 3 Hot Wings + 3 Tender + 30 Popcorn + 2 Dips</span></span><span class="price">₹519</span></li>
+          <li><span class="name">Ultimate Saving Bucket<span class="desc">5 Lollipop + 7 Hot Wings + 4 Tender + 2 Dips</span></span><span class="price">₹599</span></li>
+        </ul>
+        <h4 class="sub">Extra dips, ₹19 each</h4>
+        <p class="dips">Tom Mayo, Garlic, Cheese, Schezwan, Chipotle, Tandoori Mayo, Makhani</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Order -->
+  <section id="order" class="how">
+    <div class="wrap">
+      <h2>Three ways to enjoy</h2>
+      <div class="grid">
+        <div><h3>Dine-in</h3><p>Sit down, relax and eat it fresh from the kitchen.</p></div>
+        <div><h3>Takeaway</h3><p>Call ahead and pick it up on your way.</p></div>
+        <div><h3>Delivery</h3><p>Get it at your door. Call to check delivery for your area.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Find us -->
+  <section id="visit">
+    <div class="wrap">
+      <h2>Find us</h2>
+      <div class="visit">
+        <div>
+          <h3>Address</h3>
+          <p>Jalna Rd, beside Shri Krushna Ganpati Complex,<br>Bhokardan, Maharashtra 431114</p>
+          <p><a href="https://www.google.com/maps/search/?api=1&query=Giza+A+Fried+Chicken+Bhokardan" target="_blank" rel="noopener">Get directions</a></p>
+        </div>
+        <div>
+          <h3>Hours</h3>
+          <p>Open until 11:00 PM</p>
+        </div>
+        <div>
+          <h3>Call</h3>
+          <p><a href="tel:+917755907737">077559 07737</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Demo website made by Rushikesh Lokhandkar. Not the official website of Giza A Fried Chicken.</footer>
+
+<script>
+  // मेन्यू फिल्टर: बटण दाबल्यावर फक्त तो प्रकार दिसतो
+  const tabs = document.getElementById("tabs");
+  const cats = document.querySelectorAll(".cat");
+
+  tabs.addEventListener("click", function (event) {
+    const button = event.target.closest("button");
+    if (!button) return;
+    const chosen = button.dataset.cat;
+
+    tabs.querySelectorAll("button").forEach(function (b) {
+      b.setAttribute("aria-pressed", b === button ? "true" : "false");
+    });
+
+    cats.forEach(function (c) {
+      c.hidden = chosen !== "all" && c.dataset.cat !== chosen;
+    });
+  });
+</script>
+</body>
+</html>
